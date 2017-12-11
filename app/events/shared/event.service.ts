@@ -5,11 +5,14 @@ import { IEvent } from './event.model';
 
 @Injectable()
 export class EventService {
-    getEvents(): IEvent []{
-        return EVENTS;
+    getEvents() {
+        let subject = new Subject();
+        setTimeout(() => { subject.next(EVENTS); subject.complete(); }, 100)
+        return subject;
     }
+
     getEvent(id: number): IEvent {
-        return EVENTS.find(event=> event.id === id)
+        return EVENTS.find(event => event.id === id)
     }
 }
 
